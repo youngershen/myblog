@@ -17,7 +17,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'c0i^b=_vun9re8^l9g-!4czu48g2d#d^tv4n39-%s=@22-&$o^'
+SECRET_KEY = 'are you thinking what i am thinking ^O^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -36,6 +36,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'blog'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -58,15 +59,19 @@ WSGI_APPLICATION = 'myblog.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME'  : 'myblog_dev',
+        'USER'  : 'root',
+        'PASSWORD' : 'root',
+        'HOST'  : '127.0.0.1',
+        'PORT'  : '3306'
     }
 }
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-cn'
 
 TIME_ZONE = 'UTC'
 
@@ -81,3 +86,19 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR + '/assets/'
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
+# user static files
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR + '/media/'
+#template loader
+TEMPLATE_LOADERS=(
+                   # 'django.template.loaders.filesystem.Loader',
+                    'django.template.loaders.app_directories.Loader',
+                 )
+#templates files
+TEMPLATE_DIRS = (os.path.join(BASE_DIR, 'templates'), )
