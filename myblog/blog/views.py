@@ -11,15 +11,15 @@ logger = logging.getLogger(__name__)
 # Create your views here.
 
 class IndexView(Jinja2TemplateMixin, TemplateView):
-    template_name='index.html'
+    template_name='base.html'
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
-        context.update(dict(name='sss'))
-        logger.info("=========================")
         return context
 
 
+
+#tag views
 class TagListView(TemplateView):
     template_name='index.html'
 
@@ -39,9 +39,10 @@ class TagDetailView(TemplateView):
             return context
 
 
+
+#article views
 class ArticleListView(TemplateView):
     template_name='index.html'
-
 
 class ArticleDetailView(TemplateView):
     template_name='index.html'
@@ -53,3 +54,7 @@ class ArticleDetailView(TemplateView):
         article = Article.objects.get(slug=slug)
         context.update(dict(aslug=article.get_absolute_url()))
         return context
+
+
+class ArticleAddView(TemplateView):
+    template_name='index.html'
