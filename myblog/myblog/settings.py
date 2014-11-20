@@ -102,3 +102,11 @@ TEMPLATE_LOADERS=(
                  )
 #templates files
 TEMPLATE_DIRS = (os.path.join(BASE_DIR, 'templates'), )
+
+#coffin settings
+JINJA2_EXTENSIONS = [
+  'jinja2.ext.with_',
+  'jinja2.ext.do',
+  'jinja2.ext.i18n',
+  'common.jinja2ext.MyExt'
+]
