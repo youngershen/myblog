@@ -10,3 +10,11 @@ jinja2==2.7.3
 coffin==0.3.8
 #django-compressor
 django-compressor==1.4
+#pillow
+pillow==2.6.1
+#unidecode
+unidecode==0.04.16
+#django-admin-tools
+django-admin-tools==0.5.2
+#feedparser
+feedparser==5.1.3
