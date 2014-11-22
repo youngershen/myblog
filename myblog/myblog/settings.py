@@ -151,11 +151,6 @@ LOGGING = {
             'level': 'ERROR',
             'class': 'django.utils.log.AdminEmailHandler',
         },
-        'file': {
-            'level':'DEBUG',
-            'class':'logging.FileHandler',
-            'filename':'./logs/blog.view.log',
-            }
     },
     'loggers': {
         'django': {
@@ -169,7 +164,7 @@ LOGGING = {
             'propagate': False,
         },
         'blog.views': {
-            'handlers': ['console', 'file'],
+            'handlers': ['console'],
             'level': 'INFO',
         }
     }
