@@ -56,5 +56,9 @@ class ArticleDetailView(TemplateView):
         return context
 
 
-class ArticleAddView(TemplateView):
-    template_name='index.html'
+class ArticleAddView(Jinja2TemplateMixin, TemplateView):
+    template_name='article_add.html'
+
+    def get(self, request, *args, **kwargs):
+        context = dict()
+        return self.render_to_response(context)

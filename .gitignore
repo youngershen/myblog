@@ -3,6 +3,7 @@
 *.pyc
 *.pyo
 .DS_Store
+.tag
 env
 node_modules
 logs
