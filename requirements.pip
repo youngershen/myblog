@@ -20,3 +20,6 @@ django-admin-tools==0.5.2
 feedparser==5.1.3
 #django-debug-toolbar
 django-debug-toolbar==1.2.2
+#django-db-log
+django-db-log==2.2.1
+#django-dynamic-media-serve
