@@ -1,7 +1,7 @@
 from django.contrib import admin
-from blog.models import Tag
-from blog.models import Article
-from blog.models import Comment
+from .models import Tag
+from .models import Article
+from .models import Comment
 # Register your models here.
 
 @admin.register(Tag)

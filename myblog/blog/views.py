@@ -1,9 +1,11 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
-from common.mixins.Jinja2Mixins import Jinja2TemplateMixin
-from blog.models import Article
-from blog.models import Tag
 from django.http import Http404
+
+from common.mixins.Jinja2Mixins import Jinja2TemplateMixin
+from .models import Article
+from .models import Tag
+
 
 #logging
 import logging
@@ -20,10 +22,10 @@ class IndexView(Jinja2TemplateMixin, TemplateView):
 
 
 #tag views
-class TagListView(TemplateView):
+class TagListView(Jinja2TemplateMixin, TemplateView):
     template_name='index.html'
 
-class TagDetailView(TemplateView):
+class TagDetailView(Jinja2TemplateMixin, TemplateView):
     template_name='index.html'
 
     def get_context_data(self, *args, **kwargs):
@@ -41,10 +43,10 @@ class TagDetailView(TemplateView):
 
 
 #article views
-class ArticleListView(TemplateView):
-    template_name='index.html'
+class ArticleListView(Jinja2TemplateMixin, TemplateView):
+    template_name='article_list.html'
 
-class ArticleDetailView(TemplateView):
+class ArticleDetailView(Jinja2TemplateMixin, TemplateView):
     template_name='index.html'
     
     def get_context_data(self, *args, **kwargs):

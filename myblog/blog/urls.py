@@ -1,13 +1,10 @@
 from django.conf.urls import patterns
 from django.conf.urls import url
 from django.conf import settings
-from blog.views import *
+from .views import *
 
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'myblog.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
-    # blog app
+    # index
     url(r'^$', IndexView.as_view(), name='index'),
     #article url
     url(r'^article/$', ArticleListView.as_view(), name='article_list'),
