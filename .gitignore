@@ -8,4 +8,5 @@ env
 node_modules
 logs
 pictures
-
+.tags
+.tags*
