@@ -2,6 +2,7 @@ from django.conf.urls import patterns
 from django.conf.urls import url
 from django.conf import settings
 from .views import *
+from .tag_views import *
 
 urlpatterns = patterns('',
     # index
@@ -12,6 +13,7 @@ urlpatterns = patterns('',
     url(r'^article/(?P<slug>[a-z0-9-]+)/$', ArticleDetailView.as_view(), name='article_detail'),
     #tag url
     url(r'^tag/$', TagListView.as_view(), name='tag_list'),
+    url(r'^tag/add/$', TagAddJsonView.as_view(), name='tag_add_json_view'),
     url(r'^tag/(?P<slug>[a-z0-9-]+)/$', TagDetailView.as_view(), name='tag_detail'),
     )
 

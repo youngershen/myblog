@@ -5,9 +5,34 @@ from unidecode import unidecode
 import time
 # Create your models here.
 
+class Category(Entity):
+    name = models.CharField(max_length=255, unique=True, db_index=True)
+    description = models.TextField(null=True, blank=True, default='')
+    icon = models.ImageField(max_length=255, upload_to='pictures/%Y/%m/%d', null=True, blank=True)
+    slug = models.CharField(max_length=255, unique=True, db_index=True, null=True, blank=True)
+
+    def __unicode__(self):
+        return self.name
+
+    def __str__(self):
+        return self.__unicode__(self)
+
+
+    def get_absolute_url(self):
+        return reverse('blog:category_detail', kwargs={ 'slug':self.slug })
+
+    def save(self, *args, **kwargs):
+        self.slug='-'.join(unidecode(unicode(self.name)).lower().split())
+
+    class Meta:
+        ordering=['-created_at']
+        verbose_name='category'
+        verbose_name_plural='categories'
+
+
 class Tag(Entity):
     name = models.CharField(max_length=255, unique=True, db_index=True)
-    extra = models.TextField(null=True, blank=True)
+    description = models.TextField(null=True, blank=True, default='')
     icon = models.ImageField(max_length=255, upload_to='pictures/%Y/%m/%d', null=True, blank=True)
     slug = models.CharField(max_length=255, unique=True, db_index=True, null=True, blank=True)
 
@@ -35,6 +60,8 @@ class Article(Entity):
     content = models.TextField(null=True, blank=True)
     slug = models.CharField(max_length=255, null=True, blank=True, default='')
     tags = models.ManyToManyField(Tag, related_name='articles', blank=True, null=True)
+    category = models.ForeignKey(Category, related_name='articles', null=True, blank=True)
+
 
     def __unicode__(self):
         return self.title
