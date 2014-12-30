@@ -3,6 +3,8 @@ from django.conf.urls import url
 from django.conf import settings
 from .views import *
 from .tag_views import *
+from .article_views import *
+from .category_views import * 
 
 urlpatterns = patterns('',
     # index

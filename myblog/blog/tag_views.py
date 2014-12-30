@@ -6,7 +6,8 @@ from django.http import HttpResponse
 from django.http import JsonResponse
 
 from common.views.commonviews import JsonView
-from .forms import TagForm
+from common.views.commonviews import Jinja2TemplateView
+from .forms  import TagForm
 from .models import Article
 from .models import Tag
 
@@ -21,17 +22,20 @@ class TagJsonView(JsonView):
     def render_to_json(self, context, **kwargs):
         return JsonResponse('test', safe=False)
 
+class TagListView(Jinja2TemplateView):
+    pass
 
 
 class TagAddJsonView(JsonView):
 
     def render_to_json(self, request, *args, **kwargs):
-        
-        tagForm = TagForm(request.GET)
-        if tagForm.is_valid():
-            tagForm.save()
-
-        print request.GET
+        form = TagForm(request.GET)
+        if form.is_valid():
+            form.save()
         return JsonResponse(request, safe=False)
+    
+    def post(self, request, *args, **kwargs):
+        return Jsonresponse('hack')
 
-
+class TagDetailView(Jinja2TemplateView):
+    pass

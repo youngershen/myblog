@@ -9,28 +9,51 @@
 
 <!-- body-->
 {% block body %}
-<div class="container">
-    <div class="row  row-edit">
-        <div class="col-sm-10 col-xs-10 col-md-10 col-lg-10">
-            <form>
-                <input name="title" type="text" placeholder="Title?" />
-                <textarea name="content" data-provide="markdown" rows="10"></textarea>
-                <label class="checkbox">
-                    <input name="publish" type="checkbox"> Publish
-                </label>
-    <hr/>
-    <button type="submit" class="btn">Submit</button>
-  </form> 
+<div class="container common-container">
+    <div class="row">
+        <div class="col-sm-12 col-md-8 col-md-offset-1 col-lg-8 col-lg-offset-1">
+            <form action="{% url 'blog:article_add' %}" id="article_form" method="POST" onsubmit="return add_article()">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="text" class="form-control" name="{{form['title'].name}}" id="{{form['title'].id_for_label}}" placeholder="请输入标题"/>
+                </div>
+                <div>
+                    <textarea name="{{form['content'].name}}" id="{{form['content'].id_for_label}}" cols="30" rows="30" class="form-control"></textarea>
+                </div>
+                <button type="submit" class="btn btn-default btn-lg btn-block">提交</button>
+            </form>
         </div>
-        <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2">
-            <select class="selectpicker" data-width="100px">
-                <option value="">a</option>
-                <option value="">b</option>
-            </select>
+        <div class="col-sm-12 col-md-3 col-lg-3 ">
+            <div class="panel panel-default">
+                <div class="panel-heading">选择分类</div>
+                <div class="panel-body">
+                    <select id="panel_category" class="form-control">
+                        <option value="0" selected>请选择分类</option>
+                        {% for category in form['category'].field.choices %}
+                            <option value="{{category[0]}}">{{category[1]}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="panel-footer">
+                    <input type="text" id="add_category_name"  placeholder="输入分类名">
+                    <button type="button" onclick="add_category()">确定</button>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">选择标签</div>
+                <div class="panel-body" id="panel_tag">
+                {% for tag in form['tags'].field.choices %}
+                    {{tag[1]}}&nbsp
+                {% endfor%}
+                </div>
+                <div class="panel-footer">
+                    <input type="text"  id="add_tag_name" placeholder="输入标签名">
+                    <button type="button" onclick="">确定</button>
+                </div>
+            </div>
         </div>
     </div>
-</div> 
-   
+</div>
 {% endblock %}
 <!-- body end-->
 
@@ -40,14 +63,7 @@
 <script src={% static 'lib/tinymce/js/tinymce/tinymce.min.js' %}></script>
 
 <script>
-    $(document).ready(function(){
-        tinymce.init({
-            'selector':'textarea',
-            'language':'zh_CN',
-            
-            'height':'500'
-        });
-    });
+   
 </script>
 {% endblock %}
 <!--javascript end-->
